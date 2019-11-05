@@ -1,0 +1,7 @@
+---
+
+- hosts: autoupdater
+  vars:
+    threads: 2
+  roles:
+    - autoupdater

@@ -1,0 +1,61 @@
+diff --git a/autoupdate.js b/autoupdate.js
+index c747d03..f2e46c0 100755
+--- a/autoupdate.js
++++ b/autoupdate.js
+@@ -34,6 +34,7 @@ var initialize = function (err) {
+     var filenames = glob.sync(path.normalize(path.join(
+       __dirname, config.CDNJS_FOLDER, '/ajax/libs/' + globPattern + '/package.json'
+     )));
++      console.log(filenames);
+     var librarys = _.chain(filenames)
+       .map(function (filename) {
+         return JSON.parse(fs.readFileSync(filename, 'utf8'));
+@@ -42,7 +43,7 @@ var initialize = function (err) {
+         return typeof library.autoupdate === 'object';
+       })
+       .value();
+-    async.eachLimit(librarys, 8, function (library, callback) {
++    async.eachLimit(librarys, 2, function (library, callback) {
+       startAutoUpdate(library, callback);
+     }, function () {
+ 
+diff --git a/updaters/git.js b/updaters/git.js
+index 6a3ede3..0ea7224 100644
+--- a/updaters/git.js
++++ b/updaters/git.js
+@@ -49,16 +49,16 @@ var update = function (library, callback) {
+       console.log('Use', localTarget, 'as source of', library.name);
+       repo.remote_fetch('origin', function (err) {
+         if (err) {
+-          console.dir(err);
+           console.log(library.name, 'git repo fetch failed');
+-          next();
++          console.log(err);
++          return next();
+         }
+ 
+         repo.tags(function (err, tags) {
+           if (err) {
+             console.log(library.name, 'git tag handle failed');
+-            console.dir(err);
+-            next();
++            console.log(err);
++            return next();
+           }
+ 
+           var versions = _.map(tags, function (tag) {
+@@ -140,7 +140,12 @@ var update = function (library, callback) {
+                 var libraryPath = path.normalize(path.join(
+                   __dirname, '../../cdnjs', 'ajax', 'libs', library.name, 'package.json'
+                 ));
+-                var libraryJSON = JSON.parse(fs.readFileSync(libraryPath, 'utf8'));
++                  var libraryJSON = {};
++                  try {
++                      libraryJSON = JSON.parse(fs.readFileSync(libraryPath, 'utf8'));
++                  } catch (e) {
++                      console.log("reading package.json error", e);
++                  }
+                 libraryJSON.version = tag;
+                 fs.writeFileSync(libraryPath, JSON.stringify(libraryJSON, undefined, 2) + '\n');
+               }
+

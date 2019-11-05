@@ -1,0 +1,16 @@
+---
+
+- name: copy systemd service
+  become: true
+  copy:
+    src: "{{ item }}.service"
+    dest: "/etc/systemd/system/{{ item }}.service"
+  loop:
+    - cdnjs-bot
+
+- name: restart cdnjs-bot
+  become: true
+  systemd:
+    daemon_reload: yes
+    state: restarted
+    name: cdnjs-bot

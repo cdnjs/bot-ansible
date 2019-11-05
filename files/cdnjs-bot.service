@@ -1,0 +1,11 @@
+[Unit]
+Description=cdnjs autoupdate bot
+
+[Service]
+ExecStart=/cdnjs-sven/bot/bot
+Restart=on-failure
+User=sven
+Group=sven
+
+[Install]
+WantedBy=multi-user.target

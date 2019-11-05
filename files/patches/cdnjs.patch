@@ -1,0 +1,16 @@
+diff --git a/auto-update.js b/auto-update.js
+index 9a2bc4c739c..472ff206a60 100755
+--- a/auto-update.js
++++ b/auto-update.js
+@@ -16,8 +16,8 @@ var semver = require('semver');
+ var tempDirPath;
+ var args;
+ 
+-if (fs.existsSync('/run/shm')) {
+-  tempDirPath = '/run/shm/' + process.env.USER + '/cdnjs_NPM_temp';
++if (fs.existsSync('/cdnjs-sven')) {
++  tempDirPath = '/cdnjs-sven/cdnjs_NPM_temp';
+ } else {
+   tempDirPath = path.join(__dirname, 'temp');
+ }
+

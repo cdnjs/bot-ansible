@@ -1,0 +1,34 @@
+---
+
+- name: clone cdnjs's repos
+  git:
+    repo: "git@github.com:cdnjs/{{ item }}.git"
+    dest: "/cdnjs-sven/{{ item }}"
+    update: no
+  loop:
+    - cdnjs
+    - script
+    - bot
+    - autoupdate
+
+- name: clone PeterDaveHello/web-minify-helper repo
+  git:
+    repo: https://github.com/PeterDaveHello/web-minify-helper.git
+    dest: /cdnjs-sven/web-minify-helper
+
+- name: install npm deps
+  shell: npm install
+  args:
+    chdir: "/cdnjs-sven/{{ item }}"
+  loop:
+    - web-minify-helper
+    - cdnjs
+    - autoupdate
+
+- name: symlink zopflipng-f
+  become: true
+  file:
+    src: /cdnjs-sven/bot/scripts/zopflipng-f
+    dest: /usr/bin/zopflipng-f
+    state: link
+    mode: '0777'

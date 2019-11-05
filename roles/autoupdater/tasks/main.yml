@@ -1,0 +1,81 @@
+- name: copy useful files
+  copy:
+    src: "{{ item }}"
+    dest: "{{ item }}"
+  loop:
+    - profile.bash
+    - mount-local-ssd.bash
+
+- name: apply bash profile
+  lineinfile:
+    path: .bashrc
+    regexp: "^source \\~/profile\\.bash"
+    line: source ~/profile.bash
+
+- name: install apt dependecies
+  become: true
+  apt:
+    update_cache: yes
+    pkg:
+      - apt-transport-https
+      - nethogs
+      - htop
+      - byobu
+      - sysstat
+      - less
+      - jq
+      - timelimit
+      - rsync
+    state: present
+
+- stat:
+    path: /cdnjs-sven
+  register: local_ssd_dir
+- name: mount local SSD
+  become: true
+  shell: bash mount-local-ssd.bash
+  when: local_ssd_dir.stat.exists == False
+
+- stat:
+    path: /usr/local/git
+  register: git_bin
+- include: ./install-git.yml
+  when: git_bin.stat.exists
+
+- include: ./install-nodejs.yml
+
+- name: configure git
+  git_config:
+    name: "{{ item.name }}"
+    scope: global
+    value: "{{ item.value }}"
+  loop:
+    - { name: core.preloadIndex, value: true }
+    - { name: user.name, value: robocdnjs }
+    - { name: user.email, value: cdnjs-github@cloudflare.com }
+    - { name: core.editor, value: vim }
+    - { name: credential.helper, value: cache }
+    #  Specifying 0 will cause Git to auto-detect the number of CPU’s and
+    #  set the number of threads accordingly.
+    - { name: pack.threads, value: 0 }
+
+- name: add github.com to known_hosts
+  known_hosts:
+    path: .ssh/known_hosts
+    name: github.com
+    key: "{{ lookup('file', 'pubkeys/github.com') }}"
+
+- include: ./install-cdnjs.yml
+
+- name: apply patches
+  patch:
+    src: "patches/{{ item }}.patch"
+    basedir: "/cdnjs-sven/{{ item }}"
+    strip: 1
+  loop:
+    - cdnjs
+    - autoupdate
+    - bot
+    - script
+
+- include: ./systemd.yml

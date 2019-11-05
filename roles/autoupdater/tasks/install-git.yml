@@ -1,0 +1,45 @@
+---
+
+- name: Install apt package for git
+  become: true
+  apt:
+    pkg:
+      - dh-autoreconf
+      - libcurl4-gnutls-dev
+      - libexpat1-dev
+      - gettext
+      - libz-dev
+      - libssl-dev
+
+- name: Get git binary
+  unarchive:
+    src: https://www.kernel.org/pub/software/scm/git/git-2.24.0.tar.gz
+    dest: /tmp
+    remote_src: yes
+  changed_when: false
+  register: result
+
+- name: Make all git binary
+  make:
+    chdir: /tmp/git-2.24.0
+    target: all
+    params:
+      NUM_THREADS: "{{ threads }}"
+      prefix: /usr/local
+  changed_when: false
+
+- name: Make install git binary
+  become: true
+  make:
+    chdir: /tmp/git-2.24.0
+    target: install
+    params:
+      prefix: /usr/local
+  changed_when: false
+
+- name: Remove file
+  file:
+    path: /tmp/git-2.24.0
+    state: absent
+  changed_when: false
+
