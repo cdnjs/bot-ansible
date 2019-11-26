@@ -4,7 +4,6 @@
   git:
     repo: "git@github.com:cdnjs/{{ item }}.git"
     dest: "/cdnjs-sven/{{ item }}"
-    update: no
   loop:
     - cdnjs
     - script
