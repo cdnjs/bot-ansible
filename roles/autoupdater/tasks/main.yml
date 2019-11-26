@@ -74,7 +74,6 @@
     strip: 1
   loop:
     - cdnjs
-    - autoupdate
     - script
 
 - include: ./systemd.yml
