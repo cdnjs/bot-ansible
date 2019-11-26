@@ -75,7 +75,6 @@
   loop:
     - cdnjs
     - autoupdate
-    - bot
     - script
 
 - include: ./systemd.yml

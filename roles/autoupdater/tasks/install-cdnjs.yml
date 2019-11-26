@@ -11,6 +11,14 @@
     - bot
     - autoupdate
 
+- name: create log file for bot
+  become: true
+  file:
+      path: "{{ bot_log_file }}"
+      owner: sven
+      group: sven
+      state: touch
+
 - name: clone PeterDaveHello/web-minify-helper repo
   git:
     repo: https://github.com/PeterDaveHello/web-minify-helper.git

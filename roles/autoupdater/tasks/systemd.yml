@@ -1,8 +1,8 @@
 ---
 
-- name: copy systemd service
+- name: generate systemd services
   become: true
-  copy:
+  template:
     src: "{{ item }}.service"
     dest: "/etc/systemd/system/{{ item }}.service"
   loop:
