@@ -65,6 +65,12 @@
     name: github.com
     key: "{{ lookup('file', 'pubkeys/github.com') }}"
 
+- name: stop cdnjs-bot during the update
+  become: true
+  systemd:
+    state: stopped
+    name: cdnjs-bot
+
 - include: ./install-cdnjs.yml
 
 - name: apply patches
@@ -74,6 +80,5 @@
     strip: 1
   loop:
     - cdnjs
-    - script
 
 - include: ./systemd.yml
