@@ -1,0 +1,16 @@
+---
+
+- name: create log file for website
+  become: true
+  file:
+      path: "{{ website_log_file }}"
+      owner: sven
+      group: sven
+      state: touch
+
+- name: set website updater cron
+  cron:
+    name: "update website"
+    special_time: hourly
+    job: "BOT_BASE_PATH={{ bot_base_path }} bash {{ bot_base_path }}/buildScript/build.sh 2>&1 > {{ website_log_file }}"
+    user: sven

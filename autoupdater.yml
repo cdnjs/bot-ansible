@@ -4,6 +4,7 @@
   vars:
     threads: 2
     bot_log_file: /var/log/cdnjs-bot.log
+    website_log_file: /var/log/cdnjs-website.log
     bot_base_path: /cdnjs-sven
     bot_cdnjs_check_dir: /cdnjs-sven/cdnjsCheck/
     bot_cdnjs_npm_temp: /cdnjs-sven/cdnjs_NPM_temp/

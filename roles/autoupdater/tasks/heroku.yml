@@ -1,0 +1,14 @@
+---
+
+- name: download heroku install script
+  get_url:
+    url: https://cli-assets.heroku.com/install-ubuntu.sh
+    dest: /tmp/heroku-install-ubuntu.sh
+
+- file:
+    path: /tmp/heroku-install-ubuntu.sh
+    mode: '0700'
+
+- name: install heroku cli
+  become: true
+  shell: /tmp/heroku-install-ubuntu.sh

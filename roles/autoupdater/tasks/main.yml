@@ -74,3 +74,10 @@
 - include: ./install-cdnjs.yml
 
 - include: ./systemd.yml
+
+- include: ./heroku.yml
+  tags:
+    - heroku
+- include: ./website.yml
+  tags:
+    - website
