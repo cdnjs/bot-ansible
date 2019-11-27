@@ -5,10 +5,17 @@
     repo: "git@github.com:cdnjs/{{ item }}.git"
     dest: "/cdnjs-sven/{{ item }}"
   loop:
-    - cdnjs
     - script
     - bot
     - autoupdate
+    - new-website
+    - buildScript
+
+- name: clone cdnjs repos
+  git:
+    repo: git@github.com:cdnjs/cdnjs.git
+    dest: /cdnjs-sven/cdnjs
+    update: no
 
 - name: create log file for bot
   become: true
