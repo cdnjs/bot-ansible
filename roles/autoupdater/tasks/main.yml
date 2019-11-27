@@ -73,12 +73,4 @@
 
 - include: ./install-cdnjs.yml
 
-- name: apply patches
-  patch:
-    src: "patches/{{ item }}.patch"
-    basedir: "/cdnjs-sven/{{ item }}"
-    strip: 1
-  loop:
-    - cdnjs
-
 - include: ./systemd.yml
