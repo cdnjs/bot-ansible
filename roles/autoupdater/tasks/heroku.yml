@@ -12,3 +12,12 @@
 - name: install heroku cli
   become: true
   shell: /tmp/heroku-install-ubuntu.sh
+
+- name: configure Heroku git remotes
+  shell: "heroku git:remote --app={{ item.app }} --remote={{ item.remote }}"
+  ignore_errors: yes # git remote might already exists
+  args:
+    chdir: "{{ bot_base_path }}/new-website"
+  loop:
+    - { app: cdnjs-api2, remote: heroku-api }
+    - { app: cdnjs-new-website2, remote: heroku-web }
