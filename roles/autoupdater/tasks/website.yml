@@ -11,6 +11,6 @@
 - name: set website updater cron
   cron:
     name: "update website"
-    special_time: hourly
-    job: "BOT_BASE_PATH={{ bot_base_path }} bash {{ bot_base_path }}/buildScript/build.sh 2>&1 > {{ website_log_file }}"
+    special_time: daily
+    job: "ALGOLIA_WRITE_API_KEY={{ algolia_write_api_key }} BOT_CDNJS_NPM_TEMP={{ bot_cdnjs_npm_temp }} BOT_BASE_PATH={{ bot_base_path }} bash {{ bot_base_path }}/buildScript/build.sh 2>&1 > {{ website_log_file }}"
     user: sven

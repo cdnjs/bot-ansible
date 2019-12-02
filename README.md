@@ -8,7 +8,7 @@
 ## Deploy
 
 ```
-ansible-playbook [env].yml -i prod
+ansible-playbook [env].yml -i prod --ask-vault-pass
 ```
 
 where [env] is:
