@@ -9,3 +9,5 @@ alias gcm="git checkout master"
 alias nr="npm run"
 alias gsta='git stash push'
 alias gstp='git stash pop'
+
+[ -z "$SSH_AUTH_SOCK" ] && eval "$(ssh-agent -s)"

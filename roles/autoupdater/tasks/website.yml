@@ -10,7 +10,22 @@
 
 - name: set website updater cron
   cron:
-    name: "update website"
+    name: update website
     special_time: daily
     job: "ALGOLIA_WRITE_API_KEY={{ algolia_write_api_key }} BOT_CDNJS_NPM_TEMP={{ bot_cdnjs_npm_temp }} BOT_BASE_PATH={{ bot_base_path }} bash {{ bot_base_path }}/buildScript/build.sh 2>&1 > {{ website_log_file }}"
+    user: sven
+
+- name: create log file for search
+  become: true
+  file:
+      path: "{{ search_log_file }}"
+      owner: sven
+      group: sven
+      state: touch
+
+- name: set update search updater cron
+  cron:
+    name: update search
+    special_time: daily
+    job: "ALGOLIA_WRITE_API_KEY={{ algolia_write_api_key }} GITHUB_REPO_API_KEY={{ github_repo_api_key }} algolia update 2>&1 > {{ search_log_file }}"
     user: sven

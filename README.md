@@ -1,5 +1,7 @@
 # cdnjs-autoupdate-ansible
 
+Heroku login is not automated.
+
 ## Hardware recommandation
 
 - Low latency and fast disk (https://cloud.google.com/compute/docs/disks/performance).

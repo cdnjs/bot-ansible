@@ -12,6 +12,12 @@
     regexp: "^source \\~/profile\\.bash"
     line: source ~/profile.bash
 
+- file:
+    path: ~/.ssh/config
+    owner: sven
+    group: sven
+    state: touch
+
 - name: install apt dependecies
   become: true
   apt:
@@ -59,25 +65,22 @@
     #  set the number of threads accordingly.
     - { name: pack.threads, value: 0 }
 
-- name: add github.com to known_hosts
-  known_hosts:
-    path: .ssh/known_hosts
-    name: github.com
-    key: "{{ lookup('file', 'pubkeys/github.com') }}"
-
 - name: stop cdnjs-bot during the update
+  ignore_errors: yes # service might not exist already
   become: true
   systemd:
     state: stopped
     name: cdnjs-bot
 
+- include: ./github.yml
 - include: ./install-cdnjs.yml
-
 - include: ./systemd.yml
-
 - include: ./heroku.yml
   tags:
     - heroku
 - include: ./website.yml
   tags:
     - website
+- include: ./install-tools.yml
+  tags:
+    - tools

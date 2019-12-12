@@ -1,0 +1,23 @@
+---
+
+- name: add github.com to known_hosts
+  known_hosts:
+    path: .ssh/known_hosts
+    name: github.com
+    key: "{{ lookup('file', 'pubkeys/github.com') }}"
+
+- name: store robocdnjs private ssh key
+  copy:
+    dest: /tmp/github_private_ssh_key
+    content: "{{ github_private_ssh_key }}"
+
+- file:
+    path: /tmp/github_private_ssh_key
+    mode: '0600'
+
+- name: configure ssh-agent for robocdnjs key
+  lineinfile:
+    path: ~/.ssh/config
+    regexp: "^IdentityFile /tmp/github_private_ssh_key"
+    line: IdentityFile /tmp/github_private_ssh_key
+

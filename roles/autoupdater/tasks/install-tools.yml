@@ -1,0 +1,26 @@
+---
+
+- name: store google cloud credential
+  copy:
+    dest: "~/google_storage_cdnjs_assets.json"
+    content: "{{ google_storage_cdnjs_assets }}"
+
+- set_fact:
+    tools:
+      - { name: packages, sha256: a926ba8e1baf9357683032fd4fcff9bb4d8a13cf36b315dde5bb07e3e7955586 }
+      - { name: algolia, sha256: 513cb01b12de411a8b59b89f4b6bf3d3fd8723aa15f6c1c7710d2111bbf44d4b }
+
+- name: download tools
+  become: true
+  get_url:
+    url: "https://s3.that-test.site/cdnjs/{{ item.name }}"
+    dest: "/usr/local/bin/{{ item.name }}"
+    checksum: "sha256:{{ item.sha256 }}"
+  loop: "{{ tools }}"
+
+- name: make tools executable
+  become: true
+  file:
+    path: "/usr/local/bin/{{ item.name }}"
+    mode: '0777'
+  loop: "{{ tools }}"
