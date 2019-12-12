@@ -4,6 +4,7 @@
   git:
     repo: "git@github.com:cdnjs/{{ item }}.git"
     dest: "/cdnjs-sven/{{ item }}"
+    version: master
   loop:
     - script
     - bot
