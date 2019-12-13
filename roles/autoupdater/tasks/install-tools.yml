@@ -8,7 +8,7 @@
 - set_fact:
     tools:
       - { name: packages, sha256: a926ba8e1baf9357683032fd4fcff9bb4d8a13cf36b315dde5bb07e3e7955586 }
-      - { name: algolia, sha256: 513cb01b12de411a8b59b89f4b6bf3d3fd8723aa15f6c1c7710d2111bbf44d4b }
+      - { name: algolia, sha256: 72d26d3c2b36b7d920d10f679b286ab038d88715ae91cd89505009c5bcc71557 }
 
 - name: download tools
   become: true

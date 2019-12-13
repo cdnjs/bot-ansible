@@ -27,5 +27,5 @@
   cron:
     name: update search
     special_time: daily
-    job: "ALGOLIA_WRITE_API_KEY={{ algolia_write_api_key }} GITHUB_REPO_API_KEY={{ github_repo_api_key }} algolia update 2>&1 > {{ search_log_file }}"
+    job: "ALGOLIA_WRITE_API_KEY={{ algolia_write_api_key }} GITHUB_REPO_API_KEY={{ github_repo_api_key }} cd {{ bot_base_path }}/new-website && algolia update 2>&1 > {{ search_log_file }}"
     user: sven
