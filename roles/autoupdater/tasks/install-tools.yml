@@ -9,6 +9,7 @@
     tools:
       - { name: packages, sha256: a926ba8e1baf9357683032fd4fcff9bb4d8a13cf36b315dde5bb07e3e7955586 }
       - { name: algolia, sha256: 72d26d3c2b36b7d920d10f679b286ab038d88715ae91cd89505009c5bcc71557 }
+      - { name: infralog, sha256: bb665e10d28cf5f14849f28b9909bd9c0346c09dcf1e50a291a2cbeb3119c1eb }
 
 - name: download tools
   become: true

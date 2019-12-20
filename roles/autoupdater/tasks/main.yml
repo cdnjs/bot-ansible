@@ -65,6 +65,18 @@
     #  set the number of threads accordingly.
     - { name: pack.threads, value: 0 }
 
+- name: create log files
+  become: true
+  file:
+    path: "{{ item }}"
+    owner: sven
+    group: sven
+    state: touch
+  loop:
+    - "{{ search_log_file }}"
+    - "{{ website_log_file }}"
+    - "{{ bot_log_file }}"
+
 - name: stop cdnjs-bot during the update
   ignore_errors: yes # service might not exist already
   become: true
