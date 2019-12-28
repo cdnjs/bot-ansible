@@ -1,0 +1,9 @@
+[Unit]
+Description=Run update-website.service
+
+[Timer]
+# every day at 7am
+OnCalendar=*-*-* 7:00:00
+
+[Install]
+WantedBy=timers.target

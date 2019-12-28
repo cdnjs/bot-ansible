@@ -1,0 +1,12 @@
+[Unit]
+Description=update cdnjs' website
+
+[Service]
+ExecStart=bash /home/sven/update-website.sh
+User=sven
+Group=sven
+Environment=ALGOLIA_WRITE_API_KEY={{ algolia_write_api_key }}
+Environment=GITHUB_REPO_API_KEY={{ github_repo_api_key }}
+
+[Install]
+WantedBy=multi-user.target

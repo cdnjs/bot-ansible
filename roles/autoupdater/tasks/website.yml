@@ -1,22 +1,13 @@
 ---
 
-- name: set website updater cron
-  cron:
-    name: update website
-    special_time: daily
-    job: "BOT_CDNJS_NPM_TEMP={{ bot_cdnjs_npm_temp }} BOT_BASE_PATH={{ bot_base_path }} bash {{ bot_base_path }}/buildScript/build.sh 2>&1 > {{ website_log_file }}; infralog push-and-truncate website {{ website_log_file }}"
-    user: sven
+- name: generate update script
+  template:
+    src: update-website.sh
+    dest: ~/update-website.sh
 
-- name: set update search updater cron
-  cron:
-    name: update search
-    special_time: daily
-    job: "cd {{ bot_base_path }}/new-website && ALGOLIA_WRITE_API_KEY={{ algolia_write_api_key }} GITHUB_REPO_API_KEY={{ github_repo_api_key }} algolia update 2>&1 > {{ search_log_file }}; infralog push-and-truncate search {{ search_log_file }}"
-    user: sven
-
-- name: collect bot logs
-  cron:
-    name: collect bot logs
-    special_time: daily
-    job: "infralog push-and-truncate bot {{ bot_log_file }}"
-    user: sven
+# - name: collect bot logs
+#   cron:
+#     name: collect bot logs
+#     special_time: daily
+#     job: "infralog push-and-truncate bot {{ bot_log_file }}"
+#     user: sven

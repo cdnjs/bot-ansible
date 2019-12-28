@@ -76,6 +76,7 @@
     - "{{ search_log_file }}"
     - "{{ website_log_file }}"
     - "{{ bot_log_file }}"
+    - "{{ update_website_log_file }}"
 
 - name: stop cdnjs-bot during the update
   ignore_errors: yes # service might not exist already
@@ -87,6 +88,8 @@
 - include: ./github.yml
 - include: ./install-cdnjs.yml
 - include: ./systemd.yml
+  tags:
+      - systemd
 - include: ./heroku.yml
   tags:
     - heroku

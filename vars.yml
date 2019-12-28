@@ -3,6 +3,7 @@
 threads: 4
 bot_log_file: /var/log/cdnjs-bot.log
 website_log_file: /var/log/cdnjs-website.log
+update_website_log_file: /var/log/cdnjs-update-website.log
 search_log_file: /var/log/cdnjs-search.log
 bot_base_path: /cdnjs-sven
 bot_cdnjs_check_dir: /cdnjs-sven/cdnjsCheck/
