@@ -2,8 +2,10 @@
 Description=Run update-website.service
 
 [Timer]
-# every day at 7am
+# every day at 7am and at 7pm
 OnCalendar=*-*-* 7:00:00
+OnCalendar=*-*-* 19:00:00
+Unit=update-website.service
 
 [Install]
-WantedBy=timers.target
+WantedBy=multi-user.target
