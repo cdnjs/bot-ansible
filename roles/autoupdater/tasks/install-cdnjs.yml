@@ -11,17 +11,13 @@
     - autoupdate
     - new-website
     - buildScript
+    - web-minify-helper
 
 - name: clone cdnjs repos
   git:
     repo: git@github.com:cdnjs/cdnjs.git
     dest: /cdnjs-sven/cdnjs
     update: no
-
-- name: clone PeterDaveHello/web-minify-helper repo
-  git:
-    repo: https://github.com/PeterDaveHello/web-minify-helper.git
-    dest: /cdnjs-sven/web-minify-helper
 
 - name: install npm deps
   shell: npm install
