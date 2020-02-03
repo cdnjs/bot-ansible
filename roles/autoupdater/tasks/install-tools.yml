@@ -15,6 +15,7 @@
 - name: download tools
   become: true
   get_url:
+    force: true
     url: "https://github.com/cdnjs/tools/releases/download/{{ version }}/{{ item }}"
     dest: "/usr/local/bin/{{ item }}"
   loop: "{{ tools }}"
