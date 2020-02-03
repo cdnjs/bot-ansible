@@ -61,9 +61,17 @@
     - { name: user.email, value: cdnjs-github@cloudflare.com }
     - { name: core.editor, value: vim }
     - { name: credential.helper, value: cache }
-    #  Specifying 0 will cause Git to auto-detect the number of CPU’s and
-    #  set the number of threads accordingly.
+    # Specifying 0 will cause Git to auto-detect the number of CPU’s and
+    # set the number of threads accordingly.
     - { name: pack.threads, value: 0 }
+    # Maximum size in bytes of the buffer used by smart HTTP transports when
+    # POSTing data to the remote system.
+    # Default is 1M.
+    - { name: http.postBuffer, value: 500M }
+    # An integer -1..9, indicating a default compression level. -1 is the zlib
+    # default. 0 means no compression, and 1..9 are various speed/size tradeoffs,
+    # 9 being slowest.
+    - { name: core.compression, value: 9 }
 
 - name: create log files
   become: true
