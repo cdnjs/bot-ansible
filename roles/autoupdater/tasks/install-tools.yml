@@ -6,22 +6,22 @@
     content: "{{ google_storage_cdnjs_assets }}"
 
 - set_fact:
+    version: v1.0.0
     tools:
-      - { name: packages, sha256: b2084d0b6959f4d550936101722ab7b789c0c9459598a6c52194c46b92d22e7f }
-      - { name: algolia, sha256: faaf1ac7bdd5705bda9e39da0da899e1edfde6a1ae021d78de5ad4a18465a337 }
-      - { name: infralog, sha256: bb665e10d28cf5f14849f28b9909bd9c0346c09dcf1e50a291a2cbeb3119c1eb }
+      - packages
+      - algolia
+      - checker
 
 - name: download tools
   become: true
   get_url:
-    url: "https://s3.that-test.site/cdnjs/{{ item.name }}"
-    dest: "/usr/local/bin/{{ item.name }}"
-    checksum: "sha256:{{ item.sha256 }}"
+    url: "https://github.com/cdnjs/tools/releases/download/{{ version }}/{{ item }}"
+    dest: "/usr/local/bin/{{ item }}"
   loop: "{{ tools }}"
 
 - name: make tools executable
   become: true
   file:
-    path: "/usr/local/bin/{{ item.name }}"
+    path: "/usr/local/bin/{{ item }}"
     mode: '0777'
   loop: "{{ tools }}"
