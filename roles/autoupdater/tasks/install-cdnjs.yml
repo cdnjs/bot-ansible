@@ -12,6 +12,7 @@
     - new-website
     - buildScript
     - web-minify-helper
+    - SRIs
 
 - name: clone cdnjs repos
   git:
