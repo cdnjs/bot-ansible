@@ -6,7 +6,7 @@
     content: "{{ google_storage_cdnjs_assets }}"
 
 - set_fact:
-    version: v1.0.0
+    version: v1.0.1
     tools:
       - packages
       - algolia
