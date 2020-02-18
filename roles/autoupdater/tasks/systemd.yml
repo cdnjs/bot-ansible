@@ -5,6 +5,7 @@
         - cdnjs-bot
     timers:
         - update-website
+        - cdnjs-bot2
 
 - name: generate systemd services
   become: true
