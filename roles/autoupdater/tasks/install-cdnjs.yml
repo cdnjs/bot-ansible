@@ -14,6 +14,7 @@
     - web-minify-helper
     - SRIs
     - tools
+    - glob
 
 - name: clone cdnjs repos
   git:
@@ -30,6 +31,7 @@
     - cdnjs
     - autoupdate
     - tools
+    - glob
 
 - name: symlink zopflipng-f
   become: true
