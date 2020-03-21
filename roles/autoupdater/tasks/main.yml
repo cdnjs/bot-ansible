@@ -32,6 +32,9 @@
       - jq
       - timelimit
       - rsync
+      # cdn asset compressors
+      - jpegoptim
+      - zopfli
     state: present
 
 - stat:
