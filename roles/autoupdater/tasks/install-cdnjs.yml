@@ -13,6 +13,7 @@
     - buildScript
     - web-minify-helper
     - SRIs
+    - tools
 
 - name: clone cdnjs repos
   git:
@@ -28,6 +29,7 @@
     - web-minify-helper
     - cdnjs
     - autoupdate
+    - tools
 
 - name: symlink zopflipng-f
   become: true
