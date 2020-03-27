@@ -5,6 +5,7 @@
   loop:
     - profile.bash
     - mount-local-ssd.bash
+    - mv-package.bash
 
 - name: apply bash profile
   lineinfile:
