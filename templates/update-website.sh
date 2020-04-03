@@ -25,6 +25,7 @@ cd {{ bot_base_path }}/new-website
 if ! git diff --quiet remotes/origin/HEAD; then
     # Pull for new modifications
     git pull origin master --rebase
+    git submodule update --remote --recursive
 
     # Push them to heroku, which will also trigger a restart
     git push heroku-api master
