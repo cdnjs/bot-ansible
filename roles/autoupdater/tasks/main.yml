@@ -5,6 +5,7 @@
   loop:
     - profile.bash
     - mount-local-ssd.bash
+    - mv-package.bash
 
 - name: apply bash profile
   lineinfile:
@@ -25,6 +26,7 @@
     pkg:
       - apt-transport-https
       - nethogs
+      - dbus
       - htop
       - byobu
       - sysstat
@@ -46,10 +48,10 @@
   when: local_ssd_dir.stat.exists == False
 
 - stat:
-    path: /usr/local/git
+    path: /usr/local/bin/git
   register: git_bin
 - include: ./install-git.yml
-  when: git_bin.stat.exists
+  when: git_bin.stat.exists == False
 
 - include: ./install-nodejs.yml
 
@@ -67,6 +69,15 @@
     #  Specifying 0 will cause Git to auto-detect the number of CPU’s and
     #  set the number of threads accordingly.
     - { name: pack.threads, value: 0 }
+    - { name: pack.deltaCacheSize, value: 2047m }
+    - { name: pack.windowMemory, value: 2047m }
+    - { name: pack.packSizeLimit, value: 2047m }
+    - { name: core.packedGitLimit, value: 2047m }
+    - { name: core.packedGitWindowSize, value: 2047m }
+    # git gc is OOMing and gives little benefits
+    - { name: gc.auto, value: 0 }
+  tags:
+    - git
 
 - name: create log files
   become: true

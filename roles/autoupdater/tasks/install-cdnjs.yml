@@ -14,12 +14,15 @@
     - web-minify-helper
     - SRIs
     - tools
+    - glob
+    - packages
 
-- name: clone cdnjs repos
+- name: clone cdnjs
   git:
     repo: git@github.com:cdnjs/cdnjs.git
     dest: /cdnjs-sven/cdnjs
     update: no
+    depth: 1
 
 - name: install npm deps
   shell: npm install
@@ -30,6 +33,7 @@
     - cdnjs
     - autoupdate
     - tools
+    - glob
 
 - name: symlink zopflipng-f
   become: true

@@ -5,9 +5,7 @@
     src: update-website.sh
     dest: ~/update-website.sh
 
-# - name: collect bot logs
-#   cron:
-#     name: collect bot logs
-#     special_time: daily
-#     job: "infralog push-and-truncate bot {{ bot_log_file }}"
-#     user: sven
+- name: set update-website permissions
+  file:
+    dest: ~/update-website.sh
+    mode: a+x
