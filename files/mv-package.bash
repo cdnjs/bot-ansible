@@ -18,7 +18,8 @@ package=$1
 char=$(firstLetter $package)
 cdnjsPath="ajax/libs/$package/package.json"
 
-mv $cdnjsPath "/cdnjs-sven/packages/packages/$char/$package.json"
+cp $cdnjsPath "/cdnjs-sven/packages/packages/$char/$package.json"
+touch "ajax/libs/$package/.do_not_update"
 git clean -d -f $(dirname $cdnjsPath)
 
 cd /cdnjs-sven/packages

@@ -1,3 +1,5 @@
+#!/bin/bash
+
 set -xe
 
 # Generate package.min.json and store it

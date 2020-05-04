@@ -3,8 +3,8 @@ Description=Run cdnjs-bot2.service
 
 [Timer]
 Unit=cdnjs-bot2.service
-# every 3 mins
-OnUnitActiveSec=3min
+# every 30 mins
+OnUnitActiveSec=30min
 
 [Install]
 WantedBy=multi-user.target
