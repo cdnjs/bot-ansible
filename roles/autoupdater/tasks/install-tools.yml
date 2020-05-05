@@ -6,7 +6,6 @@
     content: "{{ google_storage_cdnjs_assets }}"
 
 - set_fact:
-    version: v1.0.3
     tools:
       - packages
       - algolia
@@ -16,7 +15,7 @@
   become: true
   get_url:
     force: true
-    url: "https://github.com/cdnjs/tools/releases/download/{{ version }}/{{ item }}"
+    url: "https://github.com/cdnjs/tools/releases/latest/download/{{ item }}"
     dest: "/usr/local/bin/{{ item }}"
   loop: "{{ tools }}"
 
