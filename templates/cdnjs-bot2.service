@@ -3,11 +3,12 @@ Description=cdnjs autoupdate bot - version 2
 ConditionPathExists=!/cdnjs-sven/cdnjs-bot.lock
 
 [Service]
-ExecStart=/home/sven/autoupdate
+ExecStart=/usr/local/bin/autoupdate
 User=sven
 Group=sven
 Environment=BOT_BASE_PATH={{ bot_base_path }}
 Environment=DEBUG=1
+Environment=METRICS_TOKEN={{ bot_metrics_token }}
 
 [Install]
 WantedBy=multi-user.target

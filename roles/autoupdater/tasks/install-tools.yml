@@ -10,6 +10,7 @@
       - packages
       - algolia
       - checker
+      - autoupdate
 
 - name: download tools
   become: true

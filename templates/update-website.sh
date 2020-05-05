@@ -4,7 +4,7 @@ set -xe
 
 # Generate package.min.json and store it
 cd {{ bot_base_path }}/cdnjs
-packages generate > /tmp/out.json
+BOT_BASE_PATH={{ bot_base_path }} packages generate > /tmp/out.json
 packages set < /tmp/out.json
 
 cd {{ bot_base_path }}/SRIs
@@ -30,12 +30,10 @@ if ! git diff --quiet remotes/origin/HEAD; then
     git submodule update --remote --recursive
 
     # Push them to heroku, which will also trigger a restart
-    git push heroku-api master
     git push heroku-web master
 else
     # Restart apps to pick up new eventual changes
     heroku dyno:restart --app cdnjs-new-website2
-    heroku dyno:restart --app cdnjs-api2
 fi
 
 # Update Algolia index (website search)
