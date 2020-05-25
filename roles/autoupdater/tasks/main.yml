@@ -113,3 +113,6 @@
 - include: ./install-tools.yml
   tags:
     - tools
+- include: ./logging.yml
+  tags:
+    - logging

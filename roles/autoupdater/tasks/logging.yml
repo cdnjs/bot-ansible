@@ -1,0 +1,36 @@
+---
+
+- name: download installer
+  get_url:
+    url: https://dl.google.com/cloudagents/add-logging-agent-repo.sh
+    dest: /tmp/add-logging-agent-repo.sh
+
+- file:
+    path: /tmp/add-logging-agent-repo.sh
+    mode: '0700'
+
+- name: setup Google cloud logging
+  become: true
+  shell: /tmp/add-logging-agent-repo.sh
+
+- name: install Google cloud logging
+  become: true
+  apt:
+    update_cache: true
+    pkg:
+      - google-fluentd
+      - google-fluentd-catch-all-config
+
+- name: copy configuration
+  become: true
+  copy:
+    src: google-fluentd.conf
+    dest: /etc/google-fluentd/google-fluentd.conf
+
+- name: enable logging
+  become: true
+  systemd:
+    daemon_reload: yes
+    name: google-fluentd
+    enabled: yes
+    state: started
