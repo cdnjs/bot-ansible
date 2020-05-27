@@ -16,9 +16,12 @@ where [env] is:
 
 ## Create a new instance
 
-- on Google Cloud Platform > compute engine
+- on Google Cloud Platform; compute engine
     - select an instance of at least 30Gb of memory
     - add an additional disks: Local SSD scratch disk via NVMe of 375Gb
     - add your SSH key
-- update ansible inventory
-- login to heroku
+- in this repo; update ansible inventory
+- on the instance; login to heroku
+
+- On Google Cloud Platform; update the log router `cdnjs-logs-exporter` to match
+the new instance id.
