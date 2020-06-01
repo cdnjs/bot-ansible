@@ -7,12 +7,7 @@
     version: master
     force: true
   loop:
-    - script
-    - bot
-    - autoupdate
     - new-website
-    - buildScript
-    - web-minify-helper
     - SRIs
     - tools
     - glob
@@ -30,26 +25,5 @@
   args:
     chdir: "/cdnjs-sven/{{ item }}"
   loop:
-    - web-minify-helper
-    - cdnjs
-    - autoupdate
     - tools
     - glob
-
-# for old bot
-# TODO: after when unused
-- name: symlink zopflipng-f
-  become: true
-  file:
-    src: /cdnjs-sven/bot/scripts/zopflipng-f
-    dest: /usr/bin/zopflipng-f
-    state: link
-    mode: '0777'
-
-- name: symlink zopflipng
-  become: true
-  file:
-    src: /usr/bin/zopfli
-    dest: /usr/bin/zopflipng
-    state: link
-    mode: '0777'
