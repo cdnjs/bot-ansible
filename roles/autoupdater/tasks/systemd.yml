@@ -1,27 +1,9 @@
 ---
 
 - set_fact:
-    services:
-        - cdnjs-bot
     timers:
         - update-website
-        - cdnjs-bot2
-
-- name: generate systemd services
-  become: true
-  template:
-    src: "{{ item }}.service"
-    dest: "/etc/systemd/system/{{ item }}.service"
-  loop: "{{ services }}"
-
-- name: enable systemd services
-  become: true
-  systemd:
-    daemon_reload: yes
-    name: "{{ item }}.service"
-    enabled: yes
-    state: started
-  loop: "{{ services }}"
+        - cdnjs-bot
 
 - name: generate systemd timer's services
   become: true
@@ -45,10 +27,3 @@
     enabled: yes
     state: started
   loop: "{{ timers }}"
-
-- name: restart cdnjs-bot
-  become: true
-  systemd:
-    daemon_reload: yes
-    state: restarted
-    name: cdnjs-bot

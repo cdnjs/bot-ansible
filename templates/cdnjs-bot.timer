@@ -1,8 +1,8 @@
 [Unit]
-Description=Run cdnjs-bot2.service
+Description=Run cdnjs-bot.service
 
 [Timer]
-Unit=cdnjs-bot2.service
+Unit=cdnjs-bot.service
 # every 30 mins
 OnUnitActiveSec=30min
 

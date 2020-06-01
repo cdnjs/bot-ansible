@@ -19,5 +19,4 @@
   args:
     chdir: "{{ bot_base_path }}/new-website"
   loop:
-    - { app: cdnjs-api2, remote: heroku-api }
     - { app: cdnjs-new-website2, remote: heroku-web }

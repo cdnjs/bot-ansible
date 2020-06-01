@@ -5,7 +5,6 @@
   loop:
     - profile.bash
     - mount-local-ssd.bash
-    - mv-package.bash
 
 - name: apply bash profile
   lineinfile:
@@ -32,7 +31,6 @@
       - sysstat
       - less
       - jq
-      - timelimit
       - rsync
       # cdn asset compressors
       - jpegoptim
@@ -78,26 +76,6 @@
     - { name: gc.auto, value: 0 }
   tags:
     - git
-
-- name: create log files
-  become: true
-  file:
-    path: "{{ item }}"
-    owner: sven
-    group: sven
-    state: touch
-  loop:
-    - "{{ search_log_file }}"
-    - "{{ website_log_file }}"
-    - "{{ bot_log_file }}"
-    - "{{ update_website_log_file }}"
-
-- name: stop cdnjs-bot during the update
-  ignore_errors: yes # service might not exist already
-  become: true
-  systemd:
-    state: stopped
-    name: cdnjs-bot
 
 - include: ./github.yml
 - include: ./install-cdnjs.yml

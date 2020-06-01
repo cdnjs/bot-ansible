@@ -2,15 +2,12 @@
 Description=cdnjs autoupdate bot
 
 [Service]
-ExecStart={{ bot_base_path }}/bot/bot
-Restart=on-failure
+ExecStart=/usr/local/bin/autoupdate
 User=sven
 Group=sven
-Environment=BOT_LOG_FILE={{ bot_log_file }}
 Environment=BOT_BASE_PATH={{ bot_base_path }}
-Environment=BOT_CDNJS_CHECK_DIR={{ bot_cdnjs_check_dir }}
-Environment=BOT_CDNJS_NPM_TEMP={{ bot_cdnjs_npm_temp }}
-Environment=AUTOUPDATE_CONCURRENT_LIMIT={{ threads }}
+Environment=METRICS_TOKEN={{ bot_metrics_token }}
+Environment=DEBUG=1
 
 [Install]
 WantedBy=multi-user.target

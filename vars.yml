@@ -1,13 +1,7 @@
 ---
 
 threads: 4
-bot_log_file: /var/log/cdnjs-bot.log
-website_log_file: /var/log/cdnjs-website.log
-update_website_log_file: /var/log/cdnjs-update-website.log
-search_log_file: /var/log/cdnjs-search.log
 bot_base_path: /cdnjs-sven
-bot_cdnjs_check_dir: /cdnjs-sven/cdnjsCheck/
-bot_cdnjs_npm_temp: /cdnjs-sven/cdnjs_NPM_temp/
 algolia_write_api_key: !vault |
       $ANSIBLE_VAULT;1.1;AES256
       36613533386236333063386439626132333163633437373437303332653265346364656536353439
