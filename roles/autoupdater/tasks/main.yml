@@ -94,3 +94,6 @@
 - include: ./logging.yml
   tags:
     - logging
+- include: ./metrics.yml
+  tags:
+    - metrics

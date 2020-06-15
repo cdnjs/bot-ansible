@@ -1,0 +1,29 @@
+---
+
+- name: download installer
+  get_url:
+    url: https://dl.google.com/cloudagents/add-monitoring-agent-repo.sh
+    dest: /tmp/add-monitoring-agent-repo.sh
+
+- file:
+    path: /tmp/add-monitoring-agent-repo.sh
+    mode: '0700'
+
+- name: setup Google cloud monitoring
+  become: true
+  shell: /tmp/add-monitoring-agent-repo.sh
+
+- name: install Google cloud logging
+  become: true
+  apt:
+    update_cache: true
+    pkg:
+      - stackdriver-agent
+
+- name: enable monitoring
+  become: true
+  systemd:
+    daemon_reload: yes
+    name: stackdriver-agent
+    enabled: yes
+    state: started
