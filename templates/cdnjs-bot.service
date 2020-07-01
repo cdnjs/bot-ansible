@@ -8,6 +8,7 @@ Group=sven
 Environment=BOT_BASE_PATH={{ bot_base_path }}
 Environment=METRICS_TOKEN={{ bot_metrics_token }}
 Environment=DEBUG=1
+Environment=SENTRY_DSN={{ sentry_dsn }}
 
 [Install]
 WantedBy=multi-user.target
