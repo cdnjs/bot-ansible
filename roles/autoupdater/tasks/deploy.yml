@@ -1,0 +1,14 @@
+---
+
+- name: add deploy user
+  become: true
+  user:
+    name: deploy
+    comment: deploy agent running in the CI
+
+- name: set deploy public key
+  become: true
+  authorized_key:
+    user: deploy
+    state: present
+    key: "{{ lookup('file', 'deploy_key.pub') }}"

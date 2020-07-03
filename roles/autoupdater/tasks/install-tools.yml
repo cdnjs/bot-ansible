@@ -8,16 +8,18 @@
       - autoupdate
 
 - name: download tools
-  become: true
   get_url:
     force: true
     url: "https://github.com/cdnjs/tools/releases/latest/download/{{ item }}"
     dest: "/usr/local/bin/{{ item }}"
   loop: "{{ tools }}"
 
-- name: make tools executable
+- name: allow deploy to modify the tools and make tools executable
   become: true
+  when: hostvars[inventory_hostname].ansible_user_id != "deploy"
   file:
+    owner: deploy
+    group: deploy
     path: "/usr/local/bin/{{ item }}"
     mode: '0777'
   loop: "{{ tools }}"

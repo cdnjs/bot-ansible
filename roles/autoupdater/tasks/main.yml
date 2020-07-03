@@ -97,3 +97,6 @@
 - include: ./metrics.yml
   tags:
     - metrics
+- include: ./deploy.yml
+  tags:
+    - deploy
