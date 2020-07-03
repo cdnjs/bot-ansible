@@ -1,5 +1,7 @@
 #!/bin/bash
 
+export SENTRY_DSN={{ sentry_dsn }}
+
 set -xe
 
 # Generate package.min.json and store it
