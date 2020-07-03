@@ -11,15 +11,13 @@
   get_url:
     force: true
     url: "https://github.com/cdnjs/tools/releases/latest/download/{{ item }}"
-    dest: "/usr/local/bin/{{ item }}"
+    dest: "/home/deploy/{{ item }}"
   loop: "{{ tools }}"
 
-- name: allow deploy to modify the tools and make tools executable
-  become: true
-  when: hostvars[inventory_hostname].ansible_user_id != "deploy"
+- name: make tools executable and owned by deploy
   file:
     owner: deploy
     group: deploy
-    path: "/usr/local/bin/{{ item }}"
+    path: "/home/deploy/{{ item }}"
     mode: '0777'
   loop: "{{ tools }}"

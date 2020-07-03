@@ -6,8 +6,8 @@ set -xe
 
 # Generate package.min.json and store it
 cd {{ bot_base_path }}/cdnjs
-BOT_BASE_PATH={{ bot_base_path }} packages generate > /tmp/out.json
-packages set < /tmp/out.json
+BOT_BASE_PATH={{ bot_base_path }} /home/deploy/packages generate > /tmp/out.json
+/home/deploy/packages set < /tmp/out.json
 
 cd {{ bot_base_path }}/SRIs
 
@@ -39,4 +39,4 @@ else
 fi
 
 # Update Algolia index (website search)
-algolia update
+/home/deploy/algolia update
