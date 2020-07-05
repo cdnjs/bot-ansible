@@ -1,5 +1,10 @@
 ---
 
+- name: store google cloud credential
+  copy:
+    dest: "~/google_storage_cdnjs_assets.json"
+    content: "{{ google_storage_cdnjs_assets }}"
+
 - set_fact:
     tools:
       - packages
