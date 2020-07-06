@@ -1,9 +1,13 @@
 ---
 
+- stat:
+    path: ~/google_storage_cdnjs_assets.json
+  register: json
 - name: store google cloud credential
   copy:
-    dest: "~/google_storage_cdnjs_assets.json"
+    dest: ~/google_storage_cdnjs_assets.json
     content: "{{ google_storage_cdnjs_assets }}"
+  when: not json.stat.exists
 
 - set_fact:
     tools:
