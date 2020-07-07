@@ -1,0 +1,4 @@
+retries: 2
+logfile: /var/log/cloudflared.log
+url: ssh://localhost:22
+hostname: ssh-bot.speedcdnjs.com

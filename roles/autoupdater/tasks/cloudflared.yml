@@ -1,0 +1,49 @@
+---
+
+- name: download cloudflared
+  get_url:
+    url: https://bin.equinox.io/c/VdrWdbjqyF/cloudflared-stable-linux-amd64.tgz
+    dest: /tmp/cloudflared-stable-linux-amd64.tgz
+
+- name: extract cloudflared-stable-linux-amd64.tgz into /usr/local/bin
+  become: true
+  unarchive:
+    src: /tmp/cloudflared-stable-linux-amd64.tgz
+    dest: /usr/local/bin
+    remote_src: yes
+
+- name: make cloudflared executable
+  become: true
+  file:
+    path: /usr/local/bin/cloudflared
+    mode: '0777'
+
+- name: create dir /etc/cloudflared
+  become: true
+  file:
+    path: /etc/cloudflared
+    state: directory
+
+- name: copy cloudflared config
+  become: true
+  copy:
+    src: files/cloudflared.yml
+    dest: /etc/cloudflared/config.yml
+    mode: 0644
+  notify: restart cloudflared service
+
+- name: copy cloudflared systemd service
+  become: true
+  copy:
+    src: cloudflared.service
+    dest: /etc/systemd/system/
+    mode: 0644
+  notify: restart cloudflared service
+  register: service
+
+- name: enable cloudflared systemd service
+  become: true
+  service:
+    name: cloudflared
+    enabled: true
+  when: service.changed
