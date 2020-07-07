@@ -17,16 +17,16 @@
       - autoupdate
 
 - name: download tools
+  become: true
   get_url:
     force: true
     url: "https://github.com/cdnjs/tools/releases/latest/download/{{ item }}"
-    dest: "/home/deploy/{{ item }}"
+    dest: "/usr/local/bin/{{ item }}"
   loop: "{{ tools }}"
 
-- name: make tools executable and owned by deploy
+- name: make tools executable
+  become: true
   file:
-    owner: deploy
-    group: deploy
-    path: "/home/deploy/{{ item }}"
+    path: "/usr/local/bin/{{ item }}"
     mode: '0777'
   loop: "{{ tools }}"
