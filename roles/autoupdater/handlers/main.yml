@@ -6,3 +6,10 @@
     name: cloudflared
     enabled: true
     state: restarted
+
+- name: restart ssh service
+  become: true
+  service:
+    name: ssh
+    enabled: true
+    state: restarted

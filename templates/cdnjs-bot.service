@@ -2,7 +2,7 @@
 Description=cdnjs autoupdate bot
 
 [Service]
-ExecStart=/home/deploy/autoupdate
+ExecStart=/usr/local/bin/autoupdate
 User=sven
 Group=sven
 Environment=BOT_BASE_PATH={{ bot_base_path }}

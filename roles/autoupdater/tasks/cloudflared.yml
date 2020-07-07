@@ -47,3 +47,39 @@
     name: cloudflared
     enabled: true
   when: service.changed
+
+- name: store ssh ca
+  become: true
+  copy:
+    dest: /etc/ssh/ca.pub
+    content: "{{ ssh_ca }}"
+
+- name: copy ssh service
+  become: true
+  copy:
+    src: sshd_config
+    dest: /etc/ssh/sshd_config
+    mode: 0644
+  notify: restart ssh service
+
+- name: make sure we have a 'wheel' group
+  become: true
+  group:
+    name: wheel
+    state: present
+
+- name: allow 'wheel' group to have passwordless sudo
+  become: true
+  lineinfile:
+    dest: /etc/sudoers
+    state: present
+    regexp: '^%wheel'
+    line: '%wheel ALL=(ALL) NOPASSWD: ALL'
+    validate: 'visudo -cf %s'
+
+- name: create users
+  become: true
+  user:
+    name: tcaslin
+    groups: wheel
+    append: yes
