@@ -35,6 +35,7 @@
       # cdn asset compressors
       - jpegoptim
       - zopfli
+      - brotli
     state: present
 
 - stat:
