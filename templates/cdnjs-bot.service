@@ -9,6 +9,10 @@ Environment=BOT_BASE_PATH={{ bot_base_path }}
 Environment=METRICS_TOKEN={{ bot_metrics_token }}
 Environment=DEBUG=1
 Environment=SENTRY_DSN={{ sentry_dsn }}
+Environment=WORKERS_KV_NAMESPACE_ID={{ workers_kv_namespace_id }}
+Environment=WORKERS_KV_ACCOUNT_ID={{ workers_kv_account_id }}
+Environment=WORKERS_KV_API_KEY={{ workers_kv_api_key }}
+Environment=WORKERS_KV_EMAIL={{ workers_kv_api_email }}
 
 [Install]
 WantedBy=multi-user.target
