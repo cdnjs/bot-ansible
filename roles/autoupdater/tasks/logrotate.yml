@@ -1,0 +1,8 @@
+---
+
+- name: copy logrotate config
+  become: true
+  copy:
+    src: files/logrotate-rsyslog
+    dest: /etc/logrotate.d/rsyslog
+    mode: 0644

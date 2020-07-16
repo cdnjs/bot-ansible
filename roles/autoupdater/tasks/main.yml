@@ -101,3 +101,6 @@
 - include: ./cloudflared.yml
   tags:
     - cloudflared
+- include: ./logrotate.yml
+  tags:
+    - logrotate
