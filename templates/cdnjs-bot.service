@@ -4,6 +4,7 @@ Description=cdnjs autoupdate bot
 [Service]
 ExecStart=/usr/local/bin/autoupdate
 KillMode=mixed
+TimeoutStopSec=5min
 User=sven
 Group=sven
 Environment=BOT_BASE_PATH={{ bot_base_path }}
