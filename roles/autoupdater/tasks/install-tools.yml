@@ -15,6 +15,7 @@
       - algolia
       - checker
       - autoupdate
+      - kv
 
 - name: download tools
   become: true
