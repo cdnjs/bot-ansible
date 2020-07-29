@@ -5,6 +5,7 @@ Description=update cdnjs' website
 ExecStart=/home/sven/update-website.sh
 User=sven
 Group=sven
+Environment=BOT_BASE_PATH={{ bot_base_path }}
 Environment=ALGOLIA_WRITE_API_KEY={{ algolia_write_api_key }}
 Environment=GITHUB_REPO_API_KEY={{ github_repo_api_key }}
 
