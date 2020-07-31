@@ -12,6 +12,7 @@
     - tools
     - glob
     - packages
+    - logs
 
 - name: clone cdnjs
   git:
