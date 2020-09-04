@@ -37,6 +37,3 @@ else
     # Restart apps to pick up new eventual changes
     heroku dyno:restart --app cdnjs-new-website2
 fi
-
-# Update Algolia index (website search)
-algolia update
