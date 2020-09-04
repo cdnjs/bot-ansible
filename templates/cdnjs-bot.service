@@ -12,6 +12,7 @@ Environment=METRICS_TOKEN={{ bot_metrics_token }}
 Environment=DEBUG=1
 Environment=SENTRY_DSN={{ sentry_dsn }}
 Environment=ALGOLIA_WRITE_API_KEY={{ algolia_write_api_key }}
+Environment=GITHUB_REPO_API_KEY={{ github_repo_api_key }}
 Environment=WORKERS_KV_FILES_NAMESPACE_ID={{ workers_kv_files_namespace_id }}
 Environment=WORKERS_KV_PACKAGES_NAMESPACE_ID={{ workers_kv_packages_namespace_id }}
 Environment=WORKERS_KV_VERSIONS_NAMESPACE_ID={{ workers_kv_versions_namespace_id }}
