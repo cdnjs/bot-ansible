@@ -1,7 +1,7 @@
 set -xe
 
 dev=/dev/nvme0n1
-dest=/cdnjs-sven
+dest=/cdnjs
 
 mkfs.ext4 -F $dev
 mkdir -p $dest

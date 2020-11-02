@@ -39,7 +39,7 @@
     state: present
 
 - stat:
-    path: /cdnjs-sven
+    path: /cdnjs
   register: local_ssd_dir
 - name: mount local SSD
   become: true

@@ -76,10 +76,3 @@
     regexp: '^%wheel'
     line: '%wheel ALL=(ALL) NOPASSWD: ALL'
     validate: 'visudo -cf %s'
-
-- name: create users
-  become: true
-  user:
-    name: tcaslin
-    groups: wheel
-    append: yes

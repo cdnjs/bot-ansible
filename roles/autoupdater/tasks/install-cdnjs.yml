@@ -3,7 +3,7 @@
 - name: clone cdnjs's repos
   git:
     repo: "git@github.com:cdnjs/{{ item }}.git"
-    dest: "/cdnjs-sven/{{ item }}"
+    dest: "/cdnjs/{{ item }}"
     version: master
     force: true
   loop:
@@ -17,14 +17,14 @@
 - name: clone cdnjs
   git:
     repo: git@github.com:cdnjs/cdnjs.git
-    dest: /cdnjs-sven/cdnjs
+    dest: /cdnjs/cdnjs
     update: no
     depth: 1
 
 - name: install npm deps
   shell: npm install
   args:
-    chdir: "/cdnjs-sven/{{ item }}"
+    chdir: "/cdnjs/{{ item }}"
   loop:
     - tools
     - glob

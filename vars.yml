@@ -1,7 +1,7 @@
 ---
 
 threads: 4
-bot_base_path: /cdnjs-sven
+bot_base_path: /cdnjs
 algolia_write_api_key: !vault |
       $ANSIBLE_VAULT;1.1;AES256
       36613533386236333063386439626132333163633437373437303332653265346364656536353439
