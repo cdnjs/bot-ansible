@@ -36,6 +36,7 @@
       - jpegoptim
       - zopfli
       - brotli
+      - lvm2
     state: present
 
 - stat:

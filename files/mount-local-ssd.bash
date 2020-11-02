@@ -1,11 +1,13 @@
 set -xe
 
-dev=/dev/nvme0n1
 dest=/cdnjs
 
-mkfs.ext4 -F $dev
+vgcreate nvme /dev/nvme0n1 /dev/nvme0n2
+lvcreate -i2 -I32 -l100%FREE -ncdnjs nvme
+mkfs.ext4 /dev/nvme/cdnjs
+
 mkdir -p $dest
-mount $dev $dest
+mount /dev/nvme/cdnjs $dest
 chmod a+w $dest
 
 df -h $dest
