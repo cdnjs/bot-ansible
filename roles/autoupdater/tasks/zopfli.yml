@@ -1,0 +1,34 @@
+---
+
+- set_fact:
+    targets:
+      - zopfli
+      - zopflipng
+
+- name: Get zopfli source
+  unarchive:
+    src: https://github.com/google/zopfli/archive/zopfli-1.0.3.tar.gz
+    dest: /tmp
+    remote_src: yes
+  changed_when: false
+
+- name: Make zopfli and zopflipng
+  make:
+    chdir: /tmp/zopfli-zopfli-1.0.3
+    target: "{{ item }}"
+    params:
+      NUM_THREADS: "{{ threads }}"
+      prefix: /usr/local
+  changed_when: false
+  loop: "{{ targets }}"
+
+- name: Copy executables
+  become: true
+  copy:
+    remote_src: yes
+    src: "/tmp/zopfli-zopfli-1.0.3/{{ item }}"
+    dest: "/usr/local/bin/{{ item }}"
+    owner: sven
+    group: sven
+    mode: '0777'
+  loop: "{{ targets }}"

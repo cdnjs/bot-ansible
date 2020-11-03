@@ -32,11 +32,10 @@
       - less
       - jq
       - rsync
+      - lvm2
       # cdn asset compressors
       - jpegoptim
-      - zopfli
       - brotli
-      - lvm2
     state: present
 
 - stat:
@@ -79,6 +78,9 @@
   tags:
     - git
 
+- include: ./zopfli.yml
+  tags:
+    - zopfli
 - include: ./github.yml
 - include: ./install-cdnjs.yml
 - include: ./systemd.yml
