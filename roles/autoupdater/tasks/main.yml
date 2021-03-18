@@ -104,3 +104,6 @@
 - include: ./logrotate.yml
   tags:
     - logrotate
+- include: ./nginx.yml
+  tags:
+    - nginx
