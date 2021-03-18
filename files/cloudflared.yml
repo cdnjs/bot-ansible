@@ -1,4 +1,12 @@
-retries: 2
-logfile: /var/log/cloudflared.log
-url: ssh://localhost:22
-hostname: ssh-bot.speedcdnjs.com
+retries: 5
+tunnel: 8a2338c6-b6ae-4c6f-947a-1beae429faa3
+credentials-file: /home/sven/.cloudflared/8a2338c6-b6ae-4c6f-947a-1beae429faa3.json
+
+ingress:
+  - hostname: nginx-bot.speedcdnjs.com
+    service: https://127.0.0.1:8080
+    originRequest:
+      originServerName: nginx-bot.speedcdnjs.com
+  - hostname: ssh-bot.speedcdnjs.com
+    service: ssh://127.0.0.1:22
+  - service: http_status:404

@@ -23,6 +23,7 @@
 /var/log/cron.log
 /var/log/debug
 /var/log/messages
+/var/log/nginx-bot.access.log
 {
         rotate 1
         daily

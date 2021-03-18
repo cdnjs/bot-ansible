@@ -1,0 +1,65 @@
+---
+
+- name: install nginx
+  apt:
+    name: nginx
+    state: present
+  become: true
+
+- name: copy service
+  copy:
+    src: nginx.service
+    dest: /etc/systemd/system/nginx.service
+  notify:
+    - restart nginx service
+  become: true
+
+- name: create nginx config
+  template:
+    src: nginx.conf
+    dest: /etc/nginx/sites-available/nginx-bot.speedcdnjs.com.conf
+  notify:
+    - restart nginx service
+  become: true
+
+- name: enable website
+  file:
+    src: /etc/nginx/sites-available/nginx-bot.speedcdnjs.com.conf
+    dest: /etc/nginx/sites-enabled/default
+    state: link
+  notify:
+    - restart nginx service
+  become: true
+
+- name: remove default config
+  file:
+    path: /etc/nginx/sites-available/default
+    state: absent
+  become: true
+
+# https://support.cloudflare.com/hc/en-us/articles/204899617-Authenticated-Origin-Pulls
+- name: copy cloudflare origin pull
+  copy:
+    src: pubkeys/cloudflare.crt
+    dest: /etc/ssl/certs/cloudflare.crt
+  become: true
+  notify:
+    - restart nginx service
+
+- name: copy certs
+  copy:
+    src: http-cert.pem.enc
+    dest: /etc/ssl/certs/http-cert.pem
+    decrypt: yes
+  become: true
+  notify:
+    - restart nginx service
+
+- name: copy certs
+  copy:
+    src: http-key.pem.enc
+    dest: /etc/ssl/private/http-key.pem
+    decrypt: yes
+  become: true
+  notify:
+    - restart nginx service

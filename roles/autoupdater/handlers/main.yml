@@ -13,3 +13,10 @@
     name: ssh
     enabled: true
     state: restarted
+
+- name: restart nginx service
+  become: true
+  service:
+    name: nginx
+    enabled: true
+    state: restarted
