@@ -8,7 +8,6 @@ TimeoutStopSec=20min
 User=sven
 Group=sven
 Environment=BOT_BASE_PATH={{ bot_base_path }}
-Environment=METRICS_TOKEN={{ bot_metrics_token }}
 Environment=DEBUG=1
 Environment=SENTRY_DSN={{ sentry_dsn }}
 Environment=ALGOLIA_WRITE_API_KEY={{ algolia_write_api_key }}
