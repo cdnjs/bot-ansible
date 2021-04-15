@@ -2,7 +2,7 @@
 Description=cdnjs autoupdate bot
 
 [Service]
-ExecStart=/usr/local/bin/autoupdate
+ExecStart=/usr/local/bin/autoupdate -enforce-apparmor-profile
 KillMode=mixed
 TimeoutStopSec=20min
 User=sven
