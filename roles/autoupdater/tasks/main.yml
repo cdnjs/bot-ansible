@@ -107,3 +107,6 @@
 - include: ./nginx.yml
   tags:
     - nginx
+- include: ./apparmor.yml
+  tags:
+    - apparmor

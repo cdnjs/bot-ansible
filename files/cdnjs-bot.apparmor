@@ -1,0 +1,40 @@
+#include <tunables/global>
+
+# https://manpages.ubuntu.com/manpages/xenial/man5/apparmor.d.5.html
+
+/usr/local/bin/autoupdate {
+  #include <abstractions/base>
+  #include <abstractions/nameservice>
+
+  network,
+  signal,
+
+  /@{HOME}/.gitconfig r,
+  @{PROC}/@{pid}/attr/current r,
+
+  # autoupdate
+  /usr/bin/jpegoptim ix,
+  /usr/bin/node ix,
+  /usr/bin/brotli ix,
+  /usr/local/bin/git ux,
+  /usr/local/bin/zopflipng ix,
+
+  # git cache
+  /cdnjs/git-cache/** rw,
+  # npm tmp
+  /tmp/ r,
+  /tmp/npmtarball** rw,
+
+  # JS based compressors: cleancss, uglifyjs, ...
+  /cdnjs/tools/node_modules/** rix,
+
+  /cdnjs/packages/** r,
+  /cdnjs/cdnjs/** rw,
+  /cdnjs/logs/** rw,
+  /cdnjs/cdnjs/.git/** l,
+  /cdnjs/glob/** rix,
+
+  # node
+  /sys/fs/cgroup/memory/memory.limit_in_bytes r,
+  /etc/ssl/openssl.cnf r,
+}

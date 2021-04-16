@@ -20,3 +20,14 @@
     name: nginx
     enabled: true
     state: restarted
+
+- name: update grub
+  become: true
+  command: update-grub
+
+- name: restart apparmor service
+  become: true
+  service:
+    name: apparmor
+    enabled: true
+    state: restarted

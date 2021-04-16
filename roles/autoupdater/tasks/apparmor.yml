@@ -1,0 +1,33 @@
+---
+
+- name: configure grub
+  become: true
+  file:
+    path: /etc/default/grub.d
+    state: directory
+
+- name: copy grub config
+  become: true
+  copy:
+    src: files/grub_apparmor.cfg
+    dest: /etc/default/grub.d/apparmor.cfg
+  notify: update grub
+
+- name: Install AppArmor
+  become: true
+  apt:
+    pkg:
+      - apparmor
+      - apparmor-utils
+      - auditd
+
+- name: copy AppArmor cdnjs-bot config
+  become: true
+  copy:
+    src: files/cdnjs-bot.apparmor
+    dest: /etc/apparmor.d/usr.local.bin.autoupdate
+  notify: restart apparmor service
+
+- name: enforce AppArmor profile
+  become: true
+  command: aa-enforce /usr/local/bin/autoupdate
